@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nuestro Sobre 💌</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Allura&family=Playfair+Display&display=swap" rel="stylesheet">
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Playfair Display', serif;
+  background: linear-gradient(#ffd6e7, #ffeef5);
+  overflow-x: hidden;
+  text-align: center;
+}
+
+/* corazones */
+.hearts {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+}
+.heart {
+  position: absolute;
+  color: rgba(255,105,180,.6);
+  animation: fall linear infinite;
+}
+@keyframes fall {
+  from { transform: translateY(-10%); }
+  to { transform: translateY(110vh); }
+}
+
+/* botón música */
+.music-btn {
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  background: #ff5fa2;
+  color: white;
+  padding: 10px 14px;
+  border-radius: 20px;
+  font-size: 14px;
+  text-decoration: none;
+  z-index: 10;
+}
+
+/* sobre */
+.envelope {
+  margin: 28vh auto;
+  width: 220px;
+  height: 140px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.15);
+  cursor: pointer;
+}
+.envelope p {
+  padding-top: 55px;
+  color: #d14b8f;
+}
+
+/* carta */
+.letter {
+  display: none;
+  padding: 25px;
+  font-family: 'Allura', cursive;
+  font-size: 30px;
+  color: #b03060;
+}
+
+/* botones */
+.answer-btn {
+  background: #ff5fa2;
+  border: none;
+  color: white;
+  padding: 12px 18px;
+  margin: 8px;
+  border-radius: 25px;
+  font-size: 16px;
+  cursor: pointer;
+}
+.answer-btn.soft {
+  background: #f3b3cf;
+}
+
+/* mensaje sí */
+.yes-message {
+  display: none;
+  margin: 30px;
+  font-family: 'Allura', cursive;
+  font-size: 36px;
+  color: #b03060;
+  animation: fadeIn 2s ease;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* galería */
+.gallery {
+  display: none;
+  margin: 20px;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+.photo-box {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  height: 220px;
+  width: 160px;
+  margin: 8px;
+  border-radius: 20px;
+  border: 6px solid #f8bcd4;
+  background: #ffe3ef;
+  font-size: 40px;
+  color: #b03060;
+  text-decoration: none;
+}
+
+/* contador */
+.countdown {
+  display: none;
+  font-size: 18px;
+  color: #a8326e;
+  margin-bottom: 20px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- BOTÓN SPOTIFY -->
+<a class="music-btn" href="https://open.spotify.com/track/4OwhwvKESFtuu06dTgct7i?si=4ctv5HbRRX6hDo_i98AyYw" target="_blank">
+  💕 Nuestra canción
+</a>
+
+<div class="hearts" id="hearts"></div>
+
+<!-- SOBRE -->
+<div class="envelope" onclick="openLetter()">
+  <p>Tocá para abrir 💌</p>
+</div>
+
+<!-- CARTA -->
+<div class="letter" id="letter">
+  <p>
+    Desde que llegaste, Clara,<br>
+    todo en mí aprendió a latir distinto.<br><br>
+
+    Entre risas, miradas y momentos simples,<br>
+    te fuiste volviendo mi lugar favorito.<br><br>
+
+    Y hoy quiero preguntarte algo<br>
+    con el corazón en la mano…<br><br>
+
+    ¿Querés ser mi<br>
+    <strong>San Valentín</strong>, chefcita? ❤️
+  </p>
+
+  <div style="margin-top:20px;">
+    <button class="answer-btn" onclick="sayYes()">💖 Sí</button>
+    <button class="answer-btn soft">🌸 Pensarlo</button>
+  </div>
+</div>
+
+<!-- MENSAJE SÍ -->
+<div class="yes-message" id="yesMessage">
+  <p>
+    Entonces ya es nuestro, Clara 💘<br>
+    Prometo cuidarte, elegirte<br>
+    y seguir creando recuerdos juntos.<br><br>
+    Te quiero, chefcita ❤️
+  </p>
+</div>
+
+<!-- CONTADOR -->
+<div class="countdown" id="countdown"></div>
+
+<!-- GALERÍA (fotos clickeables) -->
+<div class="gallery" id="gallery">
+
+  <a href="https://share.icloud.com/photos/022BGQ0EcvTOQVR6pa3VY6iAA" target="_blank" class="photo-box">📸</a>
+
+  <a href="https://share.icloud.com/photos/0a84kFR_cvQJgtHULuUlIMD6g" target="_blank" class="photo-box">📸</a>
+
+  <a href="https://share.icloud.com/photos/03e_Hx8SUpeaKUAwAow6oooDw" target="_blank" class="photo-box">📸</a>
+
+  <a href="https://share.icloud.com/photos/05cW-mEBrmHOZVaGPM6lEaR8g" target="_blank" class="photo-box">📸</a>
+
+  <a href="https://share.icloud.com/photos/0bb4SMQbcvaGpBtnsiaIBrO_g" target="_blank" class="photo-box">📸</a>
+
+</div>
+
+<script>
+/* abrir carta */
+function openLetter() {
+  document.querySelector('.envelope').style.display = 'none';
+  document.getElementById('letter').style.display = 'block';
+  document.getElementById('gallery').style.display = 'block';
+  document.getElementById('countdown').style.display = 'block';
+}
+
+/* corazones */
+for(let i=0;i<20;i++){
+  const h = document.createElement('div');
+  h.className = 'heart';
+  h.innerHTML = '♥';
+  h.style.left = Math.random()*100+'%';
+  h.style.animationDuration = (5 + Math.random()*5) + 's';
+  document.getElementById('hearts').appendChild(h);
+}
+
+/* contador San Valentín */
+function updateCountdown(){
+  const now = new Date();
+  let year = now.getFullYear();
+  let valentines = new Date(year, 1, 14);
+  if (now > valentines) valentines = new Date(year + 1, 1, 14);
+  const diff = valentines - now;
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  document.getElementById('countdown').innerHTML =
+    `Faltan <strong>${days}</strong> días para San Valentín ❤️`;
+}
+updateCountdown();
+
+/* respuesta sí */
+function sayYes() {
+  document.getElementById('letter').style.display = 'none';
+  document.getElementById('yesMessage').style.display = 'block';
+
+  for(let i=0;i<15;i++){
+    const h = document.createElement('div');
+    h.className = 'heart';
+    h.innerHTML = '♥';
+    h.style.left = Math.random()*100+'%';
+    h.style.fontSize = (20 + Math.random()*20) + 'px';
+    h.style.animationDuration = '4s';
+    document.getElementById('hearts').appendChild(h);
+  }
+
+  if (navigator.vibrate) navigator.vibrate(200);
+}
+</script>
+
+</body>
+</html>
